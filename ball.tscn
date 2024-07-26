@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://yp06b63tuppx"]
+
+[ext_resource type="Texture2D" uid="uid://bua05og6e2ocn" path="res://Assets/1.png" id="2_mq2vr"]
+[ext_resource type="Script" path="res://merge.gd" id="3_sawmx"]
+[ext_resource type="Script" path="res://ball.gd" id="3_yc5ho"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_di626"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwitq"]
+radius = 16.0
+
+[node name="Demo_1_RB" type="RigidBody2D"]
+script = ExtResource("3_yc5ho")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_mq2vr")
+
+[node name="RigidBodyCollider_Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_di626")
+
+[node name="MergeCollider_Area" type="Area2D" parent="."]
+script = ExtResource("3_sawmx")
+
+[node name="MergeShape_Shape" type="CollisionShape2D" parent="MergeCollider_Area"]
+shape = SubResource("CircleShape2D_vwitq")
+
+[connection signal="area_shape_entered" from="MergeCollider_Area" to="MergeCollider_Area" method="_on_merge_trigger"]
